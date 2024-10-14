@@ -1,0 +1,4 @@
+.swrl
+{transition: background-color .2s,color .2s,border-color .2s,outline .2s;
+  -webkit-tap-highlight-color: rgba(225,234,248,.6);
+}
