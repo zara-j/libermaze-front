@@ -18,7 +18,7 @@ const BookList = () => {
     try {
       const config = {
         method: 'get',
-        url: `https://booknovo-api.shirpala.ir/api/recommendations/books/?page=${page}&limit=${itemsPerPage}`,
+        url: `https://api.libermaze.com/api/recommendations/books/?page=${page}&limit=${itemsPerPage}`,
       };
       const response = await axios.request(config);
       setBooks(response.data);
