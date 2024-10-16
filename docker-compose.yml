@@ -1,0 +1,14 @@
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  timewavefront:
+    image: libermazefront:latest  # Use the manually built image name
+    container_name: libermazefront
+    ports:
+      - "127.0.0.1:3021:80"  # Map host port 8000 to container port 8000
+    networks:
+      - gotorrentz  # Specify the network to use
+
+networks:
+  gotorrentz:
+    external: true
