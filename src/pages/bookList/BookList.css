@@ -1,0 +1,116 @@
+.read-more {
+    color: blue;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,700&display=swap');
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+book-page {
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+
+.subcontainer {
+    width: 100%;
+    height: 100%;
+    /* border : var(--testing); */
+    display: grid;
+    justify-content: space-evenly;
+    align-items: center;
+    grid-template-rows: repeat(5, 34em);
+    grid-template-columns: repeat(4, 24em);
+    grid-row-gap: 6em;
+    overflow-y: auto;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s ease-in;
+}
+
+
+.img-subcontainer {
+    width: 100%;
+    height: 100%;
+}
+
+.book-img {
+    object-fit: cover;
+    border-radius: inherit;
+    transition: 0.5s ease;
+    z-index: 3;
+}
+
+.content {
+    flex-direction: column;
+    justify-content: flex-start;
+    position: absolute;
+    width: 100%;
+    height: 45%;
+    font-style: italic;
+    top: 0%;
+    left: 0%;
+    background-color: rgba(217, 95, 74, 0.9);
+    clip-path: polygon(0 0, 100% 15%, 100% 100%, 0% 85%);
+    transform: translateY(198%);
+    transition: 0.3s ease;
+    color: var(--fontColorSecondary);
+    padding: 1.2em 1em;
+}
+
+
+.genre {
+    /* border : var(--testing); */
+    color: var(--fontColorSecondary);
+    align-self: flex-end;
+    font-size: var(--fontSizeSmall);
+    margin-top: 1em;
+    padding: 0 .5em;
+    background-color: var(--bodyBackground);
+    border-radius: .2em;
+}
+
+
+
+.title {
+    font-weight: bold;
+    align-self: flex-start;
+    margin-left: .5em;
+    margin-bottom: .3em;
+    /* border : var(--testing); */
+}
+
+
+.author {
+    font-weight: 600;
+    white-space: nowrap;
+}
