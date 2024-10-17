@@ -17,5 +17,5 @@ jobs:
     - name: Build the Docker image
       run: |
            docker rm -f libremazefront
-           docker build . --file Dockerfile --tag libremaze
+           docker build . --file Dockerfile --tag libermazefront
            docker compose up -d
