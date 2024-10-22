@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Notification from "../../notifications/Notification";
-import NavbarMobile from "../../navbar/NavbarMobile";
+import NavbarMobile from "../../navbar/navbarMobile/NavbarMobile";
 
 const Profile = () => {
 
