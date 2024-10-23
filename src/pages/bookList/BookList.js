@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import MyPagination from "./pagination/MyPagination";
 import "./BookList.css";
 
-const BookList = () => {
+const BookList = (
+) => {
+  const [page, setPage] = useState(1);
+  const [booksPerPage] = useState(10);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [limit] = useState(20); // Number of books per page
-  const [offset, setOffset] = useState(0); // Offset for pagination
-  const [totalBooks, setTotalBooks] = useState(0); // Track the total number of books
+  
 
-  const fetchBooks = async () => {
+  const fetchBooks = async (
+  ) => {
     setLoading(true);
 
     try {
-      // Update the API URL to include limit and offset as query parameters
-      const response = await axios.get(`https://api.libermaze.com/api/recommendations/books/?limit=${limit}&offset=${offset}`);
-      
-      setBooks(response.data); // Assuming the response contains a `books` array
-      setTotalBooks(response.data); // Assuming the total number of books is available
+      const config = {
+        method: 'get',
+        url: 'https://api.libermaze.com/api/recommendations/books/',
+      };
+      const response = await axios.request(config);
+      setBooks(response.data);
     } catch (error) {
       console.error(error);
       setError('Failed to fetch data. Please try again later.');
@@ -28,21 +32,8 @@ const BookList = () => {
   };
 
   useEffect(() => {
-    fetchBooks();
-  }, [offset]); // Re-fetch books when the offset changes
-
-  // Pagination handlers
-  const handleNextPage = () => {
-    if (offset + limit < totalBooks) {
-      setOffset(offset + limit);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (offset > 0) {
-      setOffset(offset - limit);
-    }
-  };
+    fetchBooks(page);
+  }, [page]);
 
   if (loading) return <p>Loading books...</p>;
   if (error) return <p>{error}</p>;
@@ -92,25 +83,9 @@ const BookList = () => {
           </div>
         ))}
       </div>
-
-      {/* Pagination controls */}
-      <div className="flex justify-between mt-4 mx-10">
-        <button
-          onClick={handlePrevPage}
-          disabled={offset === 0}
-          className={`px-4 py-2 bg-primary text-white rounded ${offset === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-        >
-          Previous
-        </button>
-        <button
-          onClick={handleNextPage}
-          disabled={offset + limit >= totalBooks}
-          className={`px-4 py-2 bg-primary text-white rounded ${offset + limit >= totalBooks ? 'opacity-50 cursor-not-allowed' : ''}`}
-        >
-          Next
-        </button>
-      </div>
+      <MyPagination books={books} onPageChange={(pageNumber) => setPage(pageNumber)} booksPerPage={booksPerPage} />
     </div>
+
   );
 };
 
