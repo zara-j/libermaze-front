@@ -3,25 +3,18 @@ import axios from 'axios';
 import MyPagination from "./pagination/MyPagination";
 import "./BookList.css";
 
-const BookList = (
-) => {
-  const [page, setPage] = useState(1);
-  const [booksPerPage] = useState(10);
+const BookList = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
 
-  const fetchBooks = async (
-  ) => {
+  const fetchBooks = async () => {
     setLoading(true);
 
     try {
-      const config = {
-        method: 'get',
-        url: 'https://api.libermaze.com/api/recommendations/books/',
-      };
-      const response = await axios.request(config);
+      const response = await axios.get('https://api.libermaze.com/api/recommendations/books/');
       setBooks(response.data);
     } catch (error) {
       console.error(error);
@@ -32,16 +25,21 @@ const BookList = (
   };
 
   useEffect(() => {
-    fetchBooks(page);
-  }, [page]);
+    fetchBooks();
+  }, []);
 
   if (loading) return <p>Loading books...</p>;
   if (error) return <p>{error}</p>;
 
+  // Calculate the start and end index for the current page
+  const endIndex = currentPage * limit;
+  const startIndex = endIndex - limit;
+  const paginatedBooks = books.slice(startIndex, endIndex);
+
   return (
     <div className="book-page">
       <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mx-10">
-        {books.map((book) => (
+        {paginatedBooks.map((book) => (
           <div className="bg-white shadow rounded overflow-hidden group" key={book.id || book.title}>
             <div className="relative">
               <img
@@ -83,9 +81,13 @@ const BookList = (
           </div>
         ))}
       </div>
-      <MyPagination books={books} onPageChange={(pageNumber) => setPage(pageNumber)} booksPerPage={booksPerPage} />
+      <MyPagination 
+        totalBooks={books.length} 
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage} 
+        limit={limit} 
+      />
     </div>
-
   );
 };
 
