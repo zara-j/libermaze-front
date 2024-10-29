@@ -115,3 +115,20 @@ img {
     font-weight: 600;
     white-space: nowrap;
 }
+
+.card {
+    /* Set fixed dimensions */
+    width: 250px;  /* You can adjust the width */
+    height: 400px; /* You can adjust the height */
+    overflow: hidden; /* Prevents overflow of content */
+  }
+  
+  .card-img-top {
+    height: 200px; /* Fixed height for the image */
+    object-fit: contain; /* Ensures the image covers the area without distortion */
+  }
+
+  .card-body{
+    height: 1%;
+
+  }
