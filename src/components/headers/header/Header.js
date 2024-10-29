@@ -11,7 +11,7 @@ const Header = () => {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1>Libermaze</h1>
+                <img src="../../../../../logo.png" alt="logo" style={{height: "63.97px"}} />
               </div>
                 <Navbar />
               </div>
