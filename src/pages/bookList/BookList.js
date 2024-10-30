@@ -138,7 +138,7 @@ const BookList = () => {
 
 
 </div>
-<MyPagination books={books} onPageChange={(pageNumber) => setPage(pageNumber)} booksPerPage={booksPerPage} />
+{/* <MyPagination books={books} onPageChange={(pageNumber) => setPage(pageNumber)} booksPerPage={booksPerPage} /> */}
 
 </div>
 
