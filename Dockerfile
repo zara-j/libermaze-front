@@ -6,6 +6,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+
 # production stage
 FROM registry.uid.ir/uid/nginx:1.21.0-alpine as production-stage
 COPY --from=build-stage /app/build /usr/share/nginx/html
