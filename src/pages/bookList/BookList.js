@@ -13,6 +13,7 @@ const BookList = () => {
 
 
 
+
   const CardItem = ({ title, description, imgSrc }) => (
     <div className="col-sm-12 col-md-6 col-lg-3 mb-4">
       <div className="card" style={{ width: '250px', height: '400px' }}> {/* Set fixed width and height */}
@@ -48,7 +49,6 @@ const BookList = () => {
       };
       const response = await axios.request(config);
       console.log(response.data)
-
 
       setBooks(response.data);
     } catch (error) {

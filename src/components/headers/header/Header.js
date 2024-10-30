@@ -12,7 +12,9 @@ const Header = () => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
 
+
                 <img src="../../../../../logo.png" alt="logo" style={{height: "63.97px"}} />
+
 
               </div>
                 <Navbar />
