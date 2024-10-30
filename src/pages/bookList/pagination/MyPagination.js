@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 
 const MyPagination = ({ totalBooks, currentPage, setCurrentPage, limit }) => {
   const pagesCount = Math.ceil(totalBooks / limit);
