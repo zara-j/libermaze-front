@@ -11,11 +11,9 @@ const Header = () => {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-<<<<<<< HEAD
+
                 <img src="../../../../../logo.png" alt="logo" style={{height: "63.97px"}} />
-=======
-              <img src="../../../../../logo.png" alt="logo" style={{height: "63.97px"}} />
->>>>>>> origin/main
+
               </div>
                 <Navbar />
               </div>
