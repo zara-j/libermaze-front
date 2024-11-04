@@ -2,41 +2,38 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import MyPagination from "./pagination/MyPagination";
 import "./BookList.css";
+import CardItem from "./CardItem";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 10;
+  const [isLastPage, setIsLastPage] = useState(false); // Track if the last page has been reached
+  const limit = 10; // Number of items per page
 
-  const CardItem = ({ title, description, imgSrc }) => (
-    <div className="col-sm-12 col-md-6 col-lg-3 mb-4">
-      <div className="card" style={{ width: '250px', height: '400px' }}>
-        <img
-          src={imgSrc}
-          className="card-img-top"
-          alt="Card cap"
-          style={{ height: '300px', objectFit: 'cover' }}
-        />
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{description}</p>
-        </div>
-      </div>
-    </div>
-  );
 
-  const fetchBooks = async () => {
+  const fetchBooks = async (page) => {
     setLoading(true);
+    const offset = (page - 1) * limit;
+
     try {
       const config = {
         method: 'get',
         url: 'https://api.libermaze.com/api/recommendations/books/',
+        headers: {
+          'Limit': limit.toString(),
+          'Offset': offset.toString(),
+        }
       };
       const response = await axios.request(config);
-      console.log(response.data);
-      setBooks(response.data);
+
+      if (response.data && response.data.length > 0) {
+        setBooks(response.data); // Update with new page data
+        setIsLastPage(false); // If data exists, not the last page
+      } else {
+        setIsLastPage(true); // If no data, this is the last page
+      }
     } catch (error) {
       console.error(error);
       setError('Failed to fetch data. Please try again later.');
@@ -45,32 +42,22 @@ const BookList = () => {
     }
   };
 
+  // Fetch books whenever currentPage changes
   useEffect(() => {
-    fetchBooks();
-  }, []);
+    fetchBooks(currentPage);
+  }, [currentPage]);
 
-  if (loading) return <p>Loading books...</p>;
   if (error) return <p>{error}</p>;
-
-  // Calculate the start and end index for the current page
-  const endIndex = currentPage * limit;
-  const startIndex = endIndex - limit;
-  const paginatedBooks = books.slice(startIndex, endIndex);
 
   return (
     <div className="container mt-5">
       <div className="row">
-        {paginatedBooks.map((book) => (
-          <CardItem
-            key={book.id} // Add a unique key for each item
-            title={book.title}
-            description={book.genre}
-            imgSrc={book.cover_image || "defaultImage.png"}
-          />
+        {books.map((book) => (
+          <CardItem key={book.id} title={book.title} description={book.genre} imgSrc={book.cover_image || "defaultImage.png"} />
         ))}
       </div>
-      <MyPagination totalBooks={books.length} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit}
-      />
+      {loading && <p>Loading...</p>}
+      <MyPagination currentPage={currentPage} setCurrentPage={setCurrentPage} isLastPage={isLastPage} />
     </div>
   );
 };
