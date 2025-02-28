@@ -8,7 +8,10 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
   return (
-    <header className="grid grid-col-4">
+    <header className="grid grid-col-4 mx-auto">
+      <div className="mx-auto pt-8 pb-4">
+        <Searchbar setSearchQuery={setSearchQuery} />
+      </div>
       <div className="px-5 lg:px-40 flex items-center justify-between">
         <div className="flex items-center">
           <img
@@ -21,9 +24,6 @@ const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
         <div className="flex items-center space-x-4">
           <Profile />
         </div>
-      </div>
-      <div className="mx-auto py-3">
-        <Searchbar setSearchQuery={setSearchQuery} />
       </div>
     </header>
   );

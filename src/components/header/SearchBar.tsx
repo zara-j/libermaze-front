@@ -24,7 +24,7 @@ const Searchbar: React.FC<SearchbarProps> = ({ setSearchQuery }) => {
       value={query}
       onChange={handleSearch}
       placeholder="Search books..."
-      className="p-2 rounded-md"
+      className="px-16 py-3 w-full rounded-md border border-gray-200"
     />
   );
 };
