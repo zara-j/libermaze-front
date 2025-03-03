@@ -8,14 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://api.libermaze.com',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
+
 })
