@@ -120,7 +120,7 @@ const NavbarMobile: React.FC = () => {
                 Dashboard
               </Link>
               <Link
-                to="/booklist"
+                to="/books"
                 onClick={closeMenu}
                 className="block text-gray-300 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-700 hover:text-white no-underline"
               >
