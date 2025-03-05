@@ -26,7 +26,7 @@ const BookPage: React.FC = () => {
     const fetchBook = async () => {
       try {
         const response = await axios.get(
-          `https://api.libermaze.com/api/recommendations/books/${id}`
+          `https://api.libermaze.com/api/recommendations/books/${id}/`
         );
         setBook(response.data);
       } catch (error) {
