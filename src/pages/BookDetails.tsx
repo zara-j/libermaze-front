@@ -45,11 +45,11 @@ const BookPage: React.FC = () => {
 
   return book ? (
     <div className="container mx-auto my-10 p-5">
-      <div className="flex flex-col md:flex-row items-center max-w-[1200px]">
+      <div className="flex flex-col md:flex-row justify-center items-center max-w-[1200px] mx-auto">
         <img
           src={book.cover_image}
           alt={book.title}
-          className="max-w-[1000px] max-h-[800px] rounded-lg shadow-md pr-8 object-cover object-center"
+          className="xl:max-w-[900px] xl:max-h-[600px] rounded-lg shadow-md pr-8 object-cover object-center mb-4 mx-auto"
         />
         {book.num_ratings > 0 &&(
           <div>{book.num_ratings}</div>
