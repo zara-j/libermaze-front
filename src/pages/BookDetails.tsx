@@ -28,7 +28,7 @@ const BookPage: React.FC = () => {
         const response = await axios.get(
           `https://api.libermaze.com/api/recommendations/books/${id}/`
         );
-        setBook(response.data);
+        setBook(response.data[0]);
       } catch (error) {
         setError("Failed to load book details.");
       } finally {
@@ -38,6 +38,7 @@ const BookPage: React.FC = () => {
 
     fetchBook();
   }, [id]);
+  console.log("hiiiiiiiiii", book)
 
   if (loading) return <p>Loading book details...</p>;
   if (error) return <p>{error}</p>;
