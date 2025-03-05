@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
 import CardItem from "../components/book/CardItem";
+import GenreFilter from "../components/book/GenreFilter";
 
 interface Book {
   id: number;
   title: string;
   author: string;
-  genre: string;
+  genre: any;
   description: string;
   num_ratings: number;
   isbn: string;
@@ -27,6 +28,8 @@ const BookList: React.FC<BookListProps> = ({ searchQuery }) => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
+
   const limit = 10;
 
   const fetchBooks = async (page: number) => {
@@ -34,18 +37,43 @@ const BookList: React.FC<BookListProps> = ({ searchQuery }) => {
     const offset = (page - 1) * limit;
 
     try {
-      const config = {
-        method: "get",
-        url: "https://api.libermaze.com/api/recommendations/books/",
-        headers: {
-          Limit: limit.toString(),
-          Offset: offset.toString(),
-        },
-      };
-      const response = await axios.request(config);
+      const response = await axios.get(
+        "https://api.libermaze.com/api/recommendations/books/",
+        {
+          headers: {
+            Limit: limit.toString(),
+            Offset: offset.toString(),
+          },
+        }
+      );
 
       if (response.data && response.data.length > 0) {
-        setBooks(response.data);
+        const booksWithGenres = response.data.map((book: Book) => {
+          let parsedGenres: string[] = [];
+  
+          if (Array.isArray(book.genre)) {
+            parsedGenres = book.genre; // If already an array, use it as-is
+          } else if (typeof book.genre === "string") {
+            try {
+              parsedGenres = JSON.parse(
+                book.genre.replace(/'/g, '"') // Convert single quotes to double quotes for JSON compatibility
+              );
+  
+              if (!Array.isArray(parsedGenres)) {
+                parsedGenres = [book.genre]; // Ensure it's always an array
+              }
+            } catch (error) {
+              console.error(`Error parsing genre for book: ${book.title}`, error);
+              parsedGenres = [book.genre]; // Fallback to string wrapped in an array
+            }
+          } else {
+            parsedGenres = ["Unknown"]; // Fallback for missing or invalid genres
+          }
+  
+          return { ...book, genre: parsedGenres };
+        });
+
+        setBooks(booksWithGenres);
         setIsLastPage(false);
       } else {
         setIsLastPage(true);
@@ -63,32 +91,48 @@ const BookList: React.FC<BookListProps> = ({ searchQuery }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    const filtered = books.filter((book) =>
-      book.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    let filtered = books;
+
+    if (searchQuery) {
+      filtered = filtered.filter((book) =>
+        book.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    if (selectedGenre) {
+      filtered = filtered.filter((book) =>
+        book.genre.some((g:string) => g.toLowerCase() === selectedGenre.toLowerCase())
+      );
+    }
+
     setFilteredBooks(filtered);
-  }, [searchQuery, books]);
+  }, [searchQuery, selectedGenre, books]);
+  
 
   if (error) return <p>{error}</p>;
 
   return (
     <div className="container my-5 mx-auto">
+      <GenreFilter onGenreChange={setSelectedGenre} /> 
+
       {searchQuery && filteredBooks.length === 0 && (
         <p className="text-center text-gray-500">
           No results found for "{searchQuery}"
         </p>
       )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mb-30 mx-auto">
         {filteredBooks.map((book) => (
           <CardItem
-          id={book.id}
             key={book.id}
+            id={book.id}
             title={book.title}
             author={book.author}
             imgSrc={book.cover_image}
           />
         ))}
       </div>
+
       {loading && <p>Loading...</p>}
       <Pagination
         currentPage={currentPage}
