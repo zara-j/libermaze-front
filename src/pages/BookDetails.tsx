@@ -45,17 +45,21 @@ const BookPage: React.FC = () => {
 
   return book ? (
     <div className="container mx-auto my-10 p-5">
-      <div className="flex flex-col md:flex-row items-center">
+      <div className="flex flex-col md:flex-row items-center max-w-[1200px]">
         <img
           src={book.cover_image}
           alt={book.title}
-          className="w-64 h-auto rounded-lg shadow-md"
+          className="max-w-[1000px] max-h-[800px] rounded-lg shadow-md pr-8 object-cover object-center"
         />
+        {book.num_ratings > 0 &&(
+          <div>{book.num_ratings}</div>
+        )} 
         <div className="ml-5">
-          <h1 className="text-3xl font-bold">{book.title}</h1>
+          <h1 className="text-3xl xl:text-5xl font-bold mb-2">{book.title}</h1>
           <p className="text-gray-600 text-lg">by {book.author}</p>
           <p className="text-gray-500">Published: {book.first_publish_year}</p>
-          <p className="mt-2">{book.description || "No description available."}</p>
+          <p className="text-gray-500">isbn:{book.isbn}</p>
+          <p className="mt-2">{book.description}</p>
           <p className="mt-2 italic text-gray-700">"{book.first_sentence}"</p>
           <a
             href={book.openlibrary_url}
@@ -65,6 +69,8 @@ const BookPage: React.FC = () => {
           >
             View on Open Library
           </a>
+          <hr className="my-5"></hr>
+          <p className="mt-2 text-justify text-sm">{book.genre}</p>
         </div>
       </div>
     </div>
