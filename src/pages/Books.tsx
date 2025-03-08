@@ -20,7 +20,7 @@ interface BookListProps {
   searchQuery: string;
 }
 
-const Books: React.FC<BookListProps> = ({ searchQuery }) => {
+const Books: React.FC<BookListProps> = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
