@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import BookList from "./pages/BookList";
 import Header from "./components/header/Header";
 import { useState } from "react";
 import BookDetails from "./pages/BookDetails";
+import Books from "./pages/Books";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -15,7 +15,7 @@ function App() {
         <Header setSearchQuery={setSearchQuery} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/books" element={<BookList searchQuery={searchQuery} />} />
+          <Route path="/books" element={<Books searchQuery={searchQuery} />} />
           <Route path="/books/:id" element={<BookDetails />} />
         </Routes>
       </BrowserRouter>

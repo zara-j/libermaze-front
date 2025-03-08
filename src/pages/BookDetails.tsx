@@ -38,7 +38,6 @@ const BookPage: React.FC = () => {
 
     fetchBook();
   }, [id]);
-  console.log("hiiiiiiiiii", book)
 
   if (loading) return <p>Loading book details...</p>;
   if (error) return <p>{error}</p>;
