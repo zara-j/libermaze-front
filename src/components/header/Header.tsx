@@ -1,29 +1,41 @@
+import { useState, useEffect } from 'react';
 import SocialLinks from "../SocialLinks";
 import Navbar from "./navbar/Navbar";
 import Profile from "./profile/Profile";
 import Searchbar from "./SearchBar";
 
-interface HeaderProps {
-  setSearchQuery: (query: string) => void;
-}
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <header>
-      {/* Upper Header - Static */}
-      <div className="flex flex-col xl:flex-row justify-center xl:justify-between items-between px-1 xl:px-10 pt-8 pb-4 mt-20">
-  <SocialLinks />
-  <Searchbar setSearchQuery={setSearchQuery} />
-</div>
+      {/* Upper Content */}
+      <div className="flex flex-col xl:flex-row justify-center xl:justify-between items-center gap-4 mx-8 pt-8 pb-4 bg-[#F8F1F6]">
+        <SocialLinks />
+        <Searchbar />
+      </div>
 
-      {/* Lower Header - Sticky */}
-      <div className="fixed top-0 start-0 z-50 flex justify-between w-full p-4 border-b border-gray-200 bg-gray-200">
-        <div className="flex items-center justify-between px-10">
+      {/* scroll Navbar  */}
+      <div className={`z-50 w-full p-4 shadow-md bg-[#F8F1F6] transition-all duration-800 ease-in-out ${isScrolled ? 'fixed top-0 shadow-lg rounded-md bg-gray-200' : 'relative top-0'}`}>
+        <div className="flex items-center justify-between px-10 mx-auto">
           <figure className="flex items-center">
             <img
               src="https://res.cloudinary.com/dxjjsfami/image/upload/v1737625533/logo_un0lvu.png"
               alt="logo"
-              className="h-16"
+              className="h-16 transition-transform duration-300 hover:scale-105"
             />
             <Navbar />
           </figure>
@@ -32,6 +44,7 @@ const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
           </div>
         </div>
       </div>
+      {isScrolled && <div className="h-[72px]"></div>}
     </header>
   );
 };

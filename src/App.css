@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
+
+/* @import "daisyui"; */
+
 body {
   background-color: #F3F2EC;
+  
 }
 .my-container {
-  background-color: gray;
-  width: 100dvw;
   overflow-x:hidden;
   display: flex;
   margin-left: auto;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Pagination from "../components/Pagination";
 import CardItem from "../components/book/CardItem";
+import { useSearchParams } from "react-router";
 
 export interface Book {
   id: number;
@@ -16,16 +17,16 @@ export interface Book {
   cover_image: string;
 }
 
-interface BookListProps {
-  searchQuery: string;
-}
 
-const Books: React.FC<BookListProps> = () => {
+const Books = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLastPage, setIsLastPage] = useState<boolean>(false);
+
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
 
   const limit = 10;
 
@@ -48,6 +49,7 @@ const Books: React.FC<BookListProps> = () => {
         setBooks(response.data);
         setIsLastPage(false); 
       } else {
+        setBooks([]);
         setIsLastPage(true);
       }
     } catch (error) {
@@ -60,13 +62,13 @@ const Books: React.FC<BookListProps> = () => {
 
   useEffect(() => {
     fetchBooks(currentPage);
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
 
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="container my-5 mx-auto">
+    <div className="container my-5 mx-auto">      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 mb-30 mx-auto">
         {books.map((book) => (
           <CardItem

@@ -1,11 +1,10 @@
 import Navbar from "./navbar/Navbar";
 import Profile from "./profile/Profile";
 
-interface HeaderProps {}
 
-const FixHeader: React.FC<HeaderProps> = () => {
+const FixHeader = () => {
   return (
-    <div className="flex items-center justify-between fixed top-0 bg-gray-100 border border-gray-200 w-full px-10">
+    <div className="flex items-center justify-between fixed top-0 bg-gray-100 border border-gray-200 w-full px-10 mx-auto">
     <figure className="flex items-center">
       <img
         src="https://res.cloudinary.com/dxjjsfami/image/upload/v1737625533/logo_un0lvu.png"

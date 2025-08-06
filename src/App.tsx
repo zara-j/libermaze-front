@@ -1,26 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import Header from "./components/header/Header";
-import { useState } from "react";
-import BookDetails from "./pages/BookDetails";
-import Books from "./pages/Books";
 
-function App() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+import { RouterProvider } from "react-router";
+import router from "./router";
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Header setSearchQuery={setSearchQuery} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/books" element={<Books searchQuery={searchQuery} />} />
-          <Route path="/books/:id" element={<BookDetails />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;
