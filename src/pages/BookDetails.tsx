@@ -1,20 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-interface Book {
-  id: number;
-  title: string;
-  author: string;
-  genre: string;
-  description: string;
-  num_ratings: number;
-  isbn: string;
-  first_publish_year: number;
-  first_sentence: string;
-  cover_image: string;
-  openlibrary_url: string;
-}
+import { Book } from "../types/book";
 
 const BookPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +16,7 @@ const BookPage: React.FC = () => {
           `https://api.libermaze.com/api/recommendations/books/${id}/`
         );
         setBook(response.data[0]);
-      } catch (error) {
+      } catch {
         setError("Failed to load book details.");
       } finally {
         setLoading(false);

@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
-import { Book } from "../../pages/Books";
+import { SearchSuggestionsProps } from "../../types/searchSuggestions";
 
-interface SearchSuggestionsProps {
-  suggestions: Book[];
-  onSuggestionClick: () => void;
-  searchQuery: string;
-}
 const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
   suggestions,
   onSuggestionClick,

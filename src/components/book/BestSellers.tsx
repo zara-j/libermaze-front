@@ -1,18 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../Card";
-
-interface NYTBook {
-  primary_isbn13: string;
-  book_image: string;
-  title: string;
-  author: string;
-}
-interface OpenLibraryBook {
-  key: string;
-  cover_i?: number;
-  title: string;
-  author_name?: string[];
-}
+import { NYTBook, OpenLibraryBook } from "../../types/bestSeller";
 
 const BestSellers: React.FC = () => {
   const [nytBooks, setNytBooks] = useState<NYTBook[]>([]);

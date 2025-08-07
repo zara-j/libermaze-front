@@ -1,8 +1,5 @@
-interface PaginationProps {
-  currentPage: number;
-  setCurrentPage: (page: number)=> void;
-  isLastPage: boolean;
-}
+import { PaginationProps } from "../types/paginations";
+
 const Pagination: React.FC<PaginationProps> = ({ currentPage, setCurrentPage, isLastPage }) => {
   const totalPagesToShow = 5;
 

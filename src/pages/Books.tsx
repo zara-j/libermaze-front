@@ -3,19 +3,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 import CardItem from "../components/book/CardItem";
 import { useSearchParams } from "react-router";
-
-export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  genre: string;
-  description: string;
-  num_ratings: number;
-  isbn: string;
-  first_publish_year: number;
-  first_sentence: string;
-  cover_image: string;
-}
+import { Book } from "../types/book";
 
 
 const Books = () => {
