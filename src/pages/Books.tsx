@@ -3,7 +3,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 import CardItem from "../components/book/CardItem";
 import { useSearchParams } from "react-router";
-import { Book } from "../types/book";
+import { Book } from "../types/book.model";
 
 
 const Books = () => {

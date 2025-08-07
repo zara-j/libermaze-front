@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Book } from "../types/book";
+import { Book } from "../types/book.model";
 
 const BookPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

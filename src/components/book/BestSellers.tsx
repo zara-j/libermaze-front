@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../Card";
-import { NYTBook, OpenLibraryBook } from "../../types/bestSeller";
+import { NYTBook, OpenLibraryBook } from "../../types/bestseller.model";
 
 const BestSellers: React.FC = () => {
   const [nytBooks, setNytBooks] = useState<NYTBook[]>([]);

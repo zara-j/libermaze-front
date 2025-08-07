@@ -1,4 +1,4 @@
-import { BookCardProps } from "../types/bookCard";
+import { BookCardProps } from "../types/book.card.model";
 
 const Card: React.FC<BookCardProps> = ({ image, title, author }) => {
     return (
