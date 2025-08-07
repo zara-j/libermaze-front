@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SearchSuggestionsProps } from "../../types/searchSuggestions";
+import { SearchSuggestionsProps } from "../../types/search.suggestions.model";
 
 const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
   suggestions,

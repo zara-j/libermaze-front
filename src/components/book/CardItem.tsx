@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CardItemProps } from "../../types/cardItem";
+import { CardItemProps } from "../../types/cardItem.model";
 
 const CardItem: React.FC<CardItemProps> = ({ id, title, author, imgSrc }) => (
   <div className="mb-8 p-5 flex justify-center items-center">

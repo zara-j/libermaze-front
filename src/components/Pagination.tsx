@@ -1,4 +1,4 @@
-import { PaginationProps } from "../types/paginations";
+import { PaginationProps } from "../types/paginations.model";
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, setCurrentPage, isLastPage }) => {
   const totalPagesToShow = 5;

@@ -1,4 +1,4 @@
-import { Book } from "../types/book";
+import { Book } from "./book.model";
 
 export interface SearchSuggestionsProps {
   suggestions: Book[];
