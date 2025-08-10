@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import Header from "./components/header/Header";
+import Footer from "./components/footer";
 
 const Layout = () => {
   console.log("✅ Layout rendered");
@@ -10,6 +11,7 @@ const Layout = () => {
       <main className="pt-40 px-8 min-h-screen bg-gray-100">
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 };
