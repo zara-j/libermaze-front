@@ -19,18 +19,18 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="mb-4">
+    <form onSubmit={handleSearch} className="mx-4">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
         type="text"
         placeholder="Search books..."
-        className="border px-3 py-2 rounded-md"
+        className="border text-md md:text-xs w-1/2 px-2 py-1 lg:py-2 rounded-md"
       />
       <button
         type="submit"
         disabled={!input.trim()}
-        className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md"
+        className="ml-2 px-3 py-1 lg:py-2 bg-blue-600 text-white text-md md:text-xs rounded-md"
       >
         Search
       </button>
