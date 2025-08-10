@@ -1,5 +1,6 @@
 version: '3.8'  # Specify the Docker Compose version
 
+
 services:
   libermazefront:
     image: libermazefront:latest  # Use the manually built image name
