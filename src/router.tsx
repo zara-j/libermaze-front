@@ -1,11 +1,12 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Layout from "./Layout";
 import Home from "./pages/Home";
 import Books from "./pages/Books";
 import BookDetails from "./pages/BookDetails";
-
+import PrivateRoutes from "./PrivateRoutes";
+import ProfilePage from "./pages/ProfilePage";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,13 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "books", Component: Books },
       { path: "books/:id", Component: BookDetails },
+      {
+        Component: PrivateRoutes,
+        children: [
+          { path: "profile", Component: ProfilePage },
+          { path: "dashboard", Component: Dashboard}
+        ],
+      },
     ],
   },
 ]);
