@@ -51,8 +51,8 @@ const BestSellers: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-6 mx-auto w-2/3 overflow-x-hidden">
-      <h1 className="text-center font-bold text-3xl px-5 py-10">
+    <div className="p-6 mx-auto overflow-x-hidden">
+      <h1 className="text-center font-bold text-2xl xl:text-3xl px-1 xl:px-5 py-10">
         The New York Times Best Sellers
       </h1>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">

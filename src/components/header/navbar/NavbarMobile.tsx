@@ -1,29 +1,26 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import NotificationMobile from "../profile/NotificationMobile";
+import SearchBar from "../SearchBar";
 
 const NavbarMobile: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(true);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
+  const openMenu = () => setMenuOpen(true)
+  const closeMenu = () => setMenuOpen(false)
   return (
     <>
       <div className="-mr-2 flex overflow-x-hidden">
         <button
-          onClick={toggleMenu}
+          onClick={openMenu}
           type="button"
           className="inline-flex md:hidden items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
           aria-controls="mobile-menu"
           aria-expanded={menuOpen}
         >
           <span className="sr-only">Open main menu</span>
+          
+          {/* hamburger icon */}
           <svg
             className={menuOpen ? "hidden h-6 w-6" : "block h-6 w-6"}
             fill="none"
@@ -63,20 +60,13 @@ const NavbarMobile: React.FC = () => {
           <div className="space-y-1 px-2 pb-3 pt-6 relative">
             <button
               onClick={closeMenu}
-              className="absolute top-3 right-4 text-gray-400 hover:text-white focus:outline-none"
+              className="absolute top-3 right-8 text-gray-400 hover:text-white focus:outline-none"
             >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              ></svg>
+              X
               <span className="sr-only">Close menu</span>
             </button>
 
-            <div className="border-t border-gray-700 pb-3 pt-6">
+            <div className="pb-3 pt-6">
               <div className="flex items-center px-5 pt-5">
                 <div className="flex-shrink-0">
                   <img
@@ -126,8 +116,16 @@ const NavbarMobile: React.FC = () => {
               >
                 Books
               </Link>
+               <Link
+                to="/books"
+                onClick={closeMenu}
+                className="block text-gray-300 rounded-md px-3 py-2 text-base font-medium hover:bg-gray-700 hover:text-white no-underline"
+              >
+                Books
+              </Link>
             </div>
           </div>
+          <SearchBar />
         </div>
       )}
     </>
