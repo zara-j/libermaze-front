@@ -7,6 +7,7 @@ import BookDetails from "./pages/BookDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import ProfilePage from "./pages/ProfilePage";
 import Dashboard from "./pages/Dashboard";
+import AuthPage from "./pages/AuthPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "books", Component: Books },
       { path: "books/:id", Component: BookDetails },
+      { path: "login", Component: AuthPage},
       {
         Component: PrivateRoutes,
         children: [
