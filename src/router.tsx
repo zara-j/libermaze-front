@@ -18,12 +18,12 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "books", Component: Books },
       { path: "books/:id", Component: BookDetails },
-      { path: "login", Component: AuthPage},
+      { path: "auth", Component: AuthPage },
       {
         Component: PrivateRoutes,
         children: [
           { path: "profile", Component: ProfilePage },
-          { path: "dashboard", Component: Dashboard}
+          { path: "dashboard", Component: Dashboard },
         ],
       },
     ],

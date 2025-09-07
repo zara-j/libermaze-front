@@ -3,8 +3,6 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer";
 
 const Layout = () => {
-  console.log("✅ Layout rendered");
-
   return (
     <>
       <Header />
