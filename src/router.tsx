@@ -8,6 +8,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import ProfilePage from "./pages/ProfilePage";
 import Dashboard from "./pages/Dashboard";
 import AuthPage from "./pages/AuthPage";
+import Setting from "./pages/Setting";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
         children: [
           { path: "profile", Component: ProfilePage },
           { path: "dashboard", Component: Dashboard },
+          { path: "setting", Component: Setting }
         ],
       },
     ],
